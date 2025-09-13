@@ -1,9 +1,10 @@
 const passwordBox = document.getElementById("password");
-const lenght = 12;
+const length = 12;
 const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowerCase = "abcdefghijklmnopqrstuvwxyz";
 const numbers = "0123456789";
 const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+const allChars = upperCase + lowerCase + numbers + symbols;
 
 
 function createPassword() {
@@ -13,8 +14,14 @@ function createPassword() {
     password = password + numbers[Math.floor(Math.random() * numbers.length)];
     password = password + symbols[Math.floor(Math.random() * symbols.length)];
 
-    console.log(password);
+    while (length > password.length) {
+        password = password + allChars[Math.floor(Math.random() * allChars.length)];
+    }
+
+    passwordBox.value = password;
 }
 
-
-createPassword();
+function copyPassword() {
+    passwordBox.select();
+    document.execCommand("copy");
+}
